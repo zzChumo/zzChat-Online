@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<meta name="theme-color" content="#333333">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<html>
+	<head>
+		<link rel="stylesheet" href="css/bootstrap-icons/bootstrap-icons.css">
+		<meta charset="utf-8" />
+		<title>zzChat</title>
+		<style>
+		body {
+			margin: 0;
+			background: #220022;
+			font-family: "Google Sans";
+			}
+			
+		@font-face {
+		    font-family: 'Material Icons';
+		    font-style: normal;
+		    font-weight: 400;
+		    src: url(https://fonts.gstatic.com/s/materialicons/v127/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+		}
+		
+		@font-face{
+		    font-family: 'Google Sans';
+		    src: url(https://fonts.gstatic.com/s/googlesans/v42/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjIUvQ.woff2);
+		}
+		
+		ul {
+    		    list-style-type: none;
+	    	    margin: 0;
+		        padding: 0;
+		        overflow: hidden;
+    		    background-color: #333;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                box-shadow: 0px 3px  3px #00000066;
+                letter-spacing: 0px;
+                }
+
+		    li {
+		        float: left;
+		    }
+
+		    li a, .dropbtn {    /*注意：如果你使用中文标题，请将下文li标签中a标签中的class属性删除，使用英文标题请忽略此注释*/
+    		    display: inline-block;
+	    	    color: white;
+		        text-align: center;
+		        padding: 14px 15px;
+    		    text-decoration: none;
+    		    font-size: 19px;
+	    	}
+
+            a.material-iconstop {
+                font-family: 'Material Icons';
+                display: inline-block;
+	    	    color: white;
+	    	    font-size: 26px;
+		        text-align: center;
+		        padding: 16px 15px;
+    		    text-decoration: none;
+            }
+
+            a.top {
+    		    display: inline-block;
+	    	    color: white;
+	    	    font-size: 19px;
+		        text-align: center;
+		        padding: 16px 15px;
+    		    text-decoration: none;
+	    	}
+
+    		li a:hover, .dropdown:hover, .dropbtn {
+	    	    background-color: #333;
+		    }
+
+            a.menu{
+                border-radius: 50px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            a.menu:hover{
+                background-color: #555;
+            }
+
+    		.dropdown {
+	    	    display: inline-block;
+		    }
+
+		    .dropdown-content {
+    		    display: none;
+	    	    position: absolute;
+		        background-color: #f9f9f9;
+		        min-width: 160px;
+    		    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	    	}
+
+		    .dropdown-content a {
+		        color: #333;
+    		    padding: 12px 16px;
+	    	    text-decoration: none;
+		        display: block;
+                border-radius: 20px;
+    		}
+
+	    	.dropdown-content a:hover {background-color: #f1f1f1}
+
+		    .dropdown:hover .dropdown-content {
+    		    display: block;
+	    	}
+
+            footer{
+                background: #eeeeee;
+            }
+
+            img{
+                padding-left: 9px;
+                padding-right: 9px;
+                border: 0;
+                border-radius: 20px;
+            }
+
+            a.z{
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                color: #fff;
+                background-color: #333;
+                box-shadow: 0px 3px  3px #00000066;
+                border: 0 solid #00ccaa;
+                border-radius: 3px;
+                transition: all 0.3s linear;
+            }
+			
+			a.z:hover{
+				background-color: #555;
+				color: #fff;
+			}
+
+		
+		div.a{
+			color: #ffffff;
+			text-align: center;
+			font-size: xx-large;
+		}
+		
+		p.b{
+			color: #dddddd;
+			text-align: center;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+
+		div.c{
+			color: #dddddd;
+			text-align: center;
+			font-size: xx-small;
+		}
+
+		p.c{
+			color: #dddddd;
+			text-align: center;
+			font-size: small;
+			padding-left: 20px;
+			padding-right: 20px;
+			}
+		
+		a.start{
+			text-decoration: none;
+			color: #ffffff;
+		}
+		
+		a{
+			text-decoration: none;
+		}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li><a href="index.html" class="material-iconstop" >arrow_back</a></li>
+			<li><a class="top">About</a></li>
+		</ul>
+		<br>
+		<br>
+		<br>
+		<p class="b"><img border="0" src="icon.png" alt="icon" width="100" height="100"></p>
+		<div class="a">zzChat<div class="c">v2.40 Language Update</div></div>
+		<p class="b">A Hack.Chat/XChat client for Android by GS Team and XQ Team</p>
+		<p class="b">This application is made with GS App Frame (GAF).<br><p class="c"><a class="z" target="_blank" href="https://www.zzchat.cf/GAF">About GAF</a></p></p>
+		<br>
+	</body>
+</html>
