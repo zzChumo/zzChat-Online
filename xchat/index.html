@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>XChat</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="imgs/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="imgs/favicon.ico">
+  <link rel="apple-touch-icon" sizes="36x36" href="imgs/36x36.png" />
+  <link rel="apple-touch-icon" sizes="48x48" href="imgs/48x48.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="imgs/72x72.png" />
+  <link rel="apple-touch-icon" sizes="96x96" href="imgs/96x96.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="imgs/144x144.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="imgs/192x192.png" />
+
+  <link rel="stylesheet" href="style.css">
+  <link id="scheme-link" rel="stylesheet" href="schemes/atelier-dune.css">
+  <link id="clear-scheme" rel="stylesheet" href="">
+
+  <link rel="stylesheet" href="vendor/katex/katex.min.css">
+  <script src="vendor/katex/katex.min.js"></script>
+  <script src="vendor/remarkable-katex/remarkableKatex.min.js"></script>
+
+  <script src="vendor/hljs/highlight.min.js"></script>
+  <link id="highlight-link" rel="stylesheet" href="vendor/hljs/styles/hybrid.min.css">
+  <script src="vendor/remarkable/remarkable.min.js"></script>
+  <style>
+    .message p {
+      word-wrap: break-word;
+
+    }
+
+    .message {
+      padding-top: 1rem;
+    }
+
+    .px10 {
+      font-size: 10px;
+    }
+
+    .px12 {
+      font-size: 12px;
+    }
+
+    .px14 {
+      font-size: 14px;
+    }
+
+    .px16 {
+      font-size: 16px;
+    }
+
+    .px18 {
+      font-size: 18px;
+    }
+
+    .px20 {
+      font-size: 20px;
+    }
+
+    @font-face {
+      font-family: 'Default_sans';
+      src: url(https://vkceyugu.cdn.bspapp.com/VKCEYUGU-7c225101-813b-41f0-bcda-b99f9ef1c986/e61d8459-ee9b-4e19-9875-cb6cfc7ec62a.woff);
+    }
+
+    body {
+      font-family: 'Default_sans'
+    }
+  </style>
+</head>
+
+<body id="body">
+  <div id="player" style="display: none; width:100%; height:100%"></div>
+  <audio style="display: none" id="notify-sound" preload="auto" src="audio/notify.m4a">
+    <source src="audio/notify.m4a" type="audio/ogg">
+  </audio>
+  <article class="container">
+    <div id="messages" class="messages"></div>
+  </article>
+  <footer id="footer">
+    <div class="container" style="display: flex;">
+      <button id="voice" type="button" style="width: 5rem;">发送语音</button>
+      <form id="chatform" class="message" style="width: 100%;">
+        <textarea id="chatinput" type="text" autocomplete="off" autofocus></textarea>
+      </form>
+
+    </div>
+
+  </footer>
+  <nav id="sidebar">
+    <div id="sidebar-content" class="hidden">
+      <h3 style="margin-bottom: 0.3rem">账户：</h3>
+      <h4 id="mynick"></h4>
+      <p>
+        <input id="auto-login" type="checkbox">
+        <label for="auto-login">下次自动登录</label>
+      </p>
+      <p>
+        <button type="button" id="clear-nick">清除用户信息</button>
+      </p>
+      <hr>
+      <h3>设置：</h3>
+      <h5>**部分需要刷新以生效**</h5>
+      <p>
+        <input id="pin-sidebar" type="checkbox">
+        <label for="pin-sidebar">固定边栏</label>
+      </p>
+      <p>
+        <input id="sound-switch" type="checkbox">
+        <label for="sound-switch">开启声音</label>
+      </p>
+      <p>
+        <input id="notify-switch" type="checkbox">
+        <label for="notify-switch">消息提示</label>
+      </p>
+      <p>
+        <input id="joined-left" type="checkbox" checked>
+        <label for="joined-left">加入/离开通知</label>
+      </p>
+      <p>
+        <input id="parse-latex" type="checkbox" checked>
+        <label for="parse-latex">开启数学公式</label>
+      </p>
+      <p>
+        <input id="syntax-highlight" type="checkbox" checked>
+        <label for="syntax-highlight">允许高亮</label>
+      </p>
+      <p>
+        <input id="allow-imgur" type="checkbox" checked>
+        <label for="allow-imgur" title="发送图片: ![标题](http://xq.kzw.ink/image.png)">允许图片</label>
+      </p>
+      <p>
+        <input id="allow-old" type="checkbox" checked>
+        <label for="allow-old">显示聊天记录</label>
+      </p>
+      <p>
+        <input id="add-old" type="checkbox" checked>
+        <label for="add-old">记录我的信息</label>
+      </p>
+      <p>
+        <input id="show-head" type="checkbox" checked>
+        <label for="show-head">显示头像</label>
+      </p>
+      <hr>
+      <p>
+      <h4>颜色模式</h4>
+      <select id="scheme-selector"></select>
+      </p>
+      <p>
+      <h4>高亮模式</h4>
+      <select id="highlight-selector"></select>
+      </p>
+      <p>
+      <h4>字体大小</h4>
+      <select id="font-selector">
+        <option value="px10">10px</option>
+        <option value="px12" selected>12px</option>
+        <option value="px14">14px</option>
+        <option value="px16">16px</option>
+        <option value="px18">18px</option>
+        <option value="px20">20px</option>
+      </select>
+      </p>
+      <p>
+      <h4>显示聊天记录数量</h4>
+      <select id="old-selector">
+        <option value="10">10条</option>
+        <option value="20" selected>20条</option>
+        <option value="30">30条</option>
+        <option value="40">40条</option>
+        <option value="50">50条</option>
+        <option value="100">所有</option>
+        <option value="1">今天所有</option>
+      </select>
+      </p>
+      <hr>
+      <p>
+        <button type="button" id="lay-video">一起看视频！</button>
+      </p>
+      <p>
+        <button type="button" id="set-bgimage">设置背景</button>
+      </p>
+      <p>
+        <button type="button" id="set-head">设置头像</button>
+      </p>
+      <!--p>
+        <button type="button" id="send-img">发送本地图片</button>
+      </p-->
+      <p>
+        <button type="button" id="clear-messages">清屏</button>
+      </p>
+      <hr>
+      <h4>在线用户</h4>
+      <p>(点击以邀请)</p>
+      <ul id="users"></ul>
+    </div>
+  </nav>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="static/layer/layer.js"></script>
+  <script src="static/dplayer/DPlayer.min.js"></script>
+  <script src="client.js"></script>
+
+  <script src="static/dist/recorder-core.js"></script>
+  <script src="static/dist/engine/mp3.js"></script>
+  <script>
+    var selector = document.querySelector("#font-selector")
+    var old_selector = document.querySelector("#old-selector")
+    window.onload = function () {
+
+      if (localStorage.getItem("index")) {
+        selector.selectedIndex = parseInt(localStorage.getItem('index'))
+        var index = selector.selectedIndex
+        var value = selector.options[index].value
+        //document.querySelector('.message').style.fontSize = value
+        document.querySelectorAll('#messages').forEach(function (ele) {
+          ele.className = '';
+          ele.classList.add('message')
+          ele.classList.add(value)
+          console.log(ele)
+        });
+      }
+      if (localStorage.getItem("old_index")) {
+        old_selector.selectedIndex = parseInt(localStorage.getItem('old_index'))
+      }
+    }
+
+
+    selector.addEventListener('change', function () {
+      var index = selector.selectedIndex
+      var value = selector.options[index].value
+      //document.querySelector('.message').style.fontSize = value
+      document.querySelectorAll('#messages').forEach(function (ele) {
+        ele.className = '';
+        ele.classList.add('message')
+        ele.classList.add(value)
+        console.log(ele)
+      });
+      localStorage.setItem('index', index)
+      window.scrollTo(0, document.body.scrollHeight);
+    })
+
+    old_selector.addEventListener('change', function () {
+      var index = old_selector.selectedIndex
+      var value = old_selector.options[index].value
+      localStorage.setItem('oldnum', value)
+      localStorage.setItem('old_index', index)
+    })
+
+    //上传图片
+    /*
+    layui.use('upload', function(){
+      var upload = layui.upload;
+      
+      //执行实例
+      var uploadInst = upload.render({
+        elem: '#send-img' //绑定元素
+        ,url: '/upload/' //上传接口
+        ,done: function(res){
+          //上传完毕回调
+        }
+        ,error: function(){
+          //请求异常回调
+        }
+      });
+    });
+    */
+
+    var rec;
+    function startRec() {
+      rec = Recorder();//使用默认配置，mp3格式
+
+      //打开麦克风授权获得相关资源
+      rec.open(function () {
+        //开始录音
+        rec.start();
+        $("#voice").text('结束录音')
+      }, function (msg, isUserNotAllow) {
+        //用户拒绝了权限或浏览器不支持
+        alert((isUserNotAllow ? "用户拒绝了权限，" : "") + "无法录音:" + msg);
+      });
+    };
+
+    function uploadRec() {
+      //停止录音，得到了录音文件blob二进制对象，想干嘛就干嘛
+      rec.stop(function (blob, duration) {
+        /*
+        blob文件对象，可以用FileReader读取出内容
+        ，或者用FormData上传，本例直接上传二进制文件
+        ，对于普通application/x-www-form-urlencoded表单上传
+        ，请参考github里面的例子
+        */
+        $('#voice').text('发送语音')
+        var form = new FormData();
+        form.append("upfile", blob, "voice.mp3"); //和普通form表单并无二致，后端接收到upfile参数的文件，文件名为recorder.mp3
+
+        //直接用ajax上传
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://xq.kzw.ink/voice", Headers={
+          "Access-Control-Allow-Origin": "*"
+        });//这个假地址在控制台network中能看到请求数据和格式，请求结果无关紧要
+        xhr.onreadystatechange = function () {
+          console.log(xhr)
+          
+          if (xhr.readyState == 4) {
+            var resp = JSON.parse(xhr.responseText)
+            send({ cmd: 'chat', text: `USERSENDVOICE_${resp.src}`})
+          }
+        }
+        xhr.send(form);
+      }, function (msg) {
+        alert("录音失败:" + msg);
+      });
+    };
+
+    var t;
+    $("#voice").click(function () {
+      if ($(this).text() == '发送语音') {
+        startRec()
+        showTime()
+      } else {
+        clearInterval(t)
+        uploadRec()
+      }
+    })
+    function showTime() {
+      var time = 60
+      t = setInterval(() => {
+        time = time-1
+        $("#voice").text(`结束录音（${time}秒）`)
+       
+        if(time ==0) {
+          clearInterval(t)
+          uploadRec()
+        }
+      }, 1000);
+    }
+  </script>
+
+
+</body>
+
+</html>
