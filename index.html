@@ -3,6 +3,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <html>
 	<head>
+		<link rel="manifest" href="manifest.json">
 		<meta charset="utf-8" />
 		<title>zzChat</title>
 		<style>
@@ -134,6 +135,21 @@
     		    display: block;
 	    	}
 		</style>
+		<script>
+                if ('serviceWorker' in navigator) {
+                        window.addEventListener('load', function () {
+                                navigator.serviceWorker.register('sw.js')
+                                .then(function (registration) {
+                                        // 注册成功
+                                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                                })
+                                .catch(function (err) {
+                                        // 注册失败:
+                                        console.log('ServiceWorker registration failed: ', err);
+                                });
+                        });
+                }
+        </script>
 		<script>
 			function localStorageGet(key) {
 				try {
