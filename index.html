@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<meta name="theme-color" content="#333333">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>zzChat</title>
+		<style>
+		body {
+			margin: 0;
+			background: #220022;
+			font-family: "Google Sans";
+			}
+
+		@font-face {
+		    font-family: 'Material Icons';
+		    font-style: normal;
+		    font-weight: 400;
+		    src: url(https://fonts.gstatic.com/s/materialicons/v127/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+		}
+		
+		@font-face{
+		    font-family: 'Google Sans';
+		    src: url(https://fonts.gstatic.com/s/googlesans/v42/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjIUvQ.woff2);
+		}
+			
+		p.start{
+			text-align: center;
+			font-size: xx-large;
+			color: #ffffff;
+		}
+		
+		p.a{
+			text-align: center;
+			color: #dddddd;
+		}
+		
+		p.c{
+			color: #dddddd;
+			text-align: center;
+			font-size: small;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		
+		a.start{
+			text-decoration: none;
+			color: #ffffff;
+		}
+		
+		a{
+			text-decoration: none;
+			color: #ffffff;
+		}
+		
+		ul {
+    		    list-style-type: none;
+	    	    margin: 0;
+		        padding: 0;
+		        overflow: hidden;
+    		    background-color: #333;
+                top: 0;
+                width: 100%;
+                box-shadow: 0px 3px  3px #00000066;
+                letter-spacing: 0px;
+                }
+
+		    li {
+		        float: left;
+		    }
+
+		    li a, .dropbtn {    /*注意：如果你使用中文标题，请将下文li标签中a标签中的class属性删除，使用英文标题请忽略此注释*/
+    		    display: inline-block;
+	    	    color: white;
+		        text-align: center;
+		        padding: 14px 15px;
+    		    text-decoration: none;
+    		    font-size: 19px;
+	    	}
+
+            a.top {
+    		    display: inline-block;
+	    	    color: white;
+	    	    font-size: 19px;
+		        text-align: center;
+		        padding: 16px 15px;
+    		    text-decoration: none;
+	    	}
+
+    		li a:hover, .dropdown:hover, .dropbtn {
+	    	    background-color: #333;
+		    }
+
+            a.menu{
+                border-radius: 50px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            a.menu:hover{
+                background-color: #555;
+            }
+
+    		.dropdown {
+	    	    display: inline-block;
+		    }
+
+		    .dropdown-content {
+    		    display: none;
+	    	    position: absolute;
+		        background-color: #f9f9f9;
+		        min-width: 160px;
+    		    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    		    border-radius: 20px;
+	    	}
+
+		    .dropdown-content a {
+		        color: #333;
+    		    padding: 12px 16px;
+	    	    text-decoration: none;
+		        display: block;
+                font-size: 15px;
+                border-radius: 20px;
+    		}
+
+    		a{
+			    text-decoration: none;
+                transition: all 0.3s linear;
+		    }
+
+	    	.dropdown-content a:hover {background-color: #f1f1f1}
+
+		    .dropdown:hover .dropdown-content {
+    		    display: block;
+	    	}
+		</style>
+		<script>
+			function localStorageGet(key) {
+				try {
+					return window.localStorage[key]
+				} catch (e) { }
+			}
+			
+			function localStorageSet(key, val) {
+				try {
+					window.localStorage[key] = val
+				} catch (e) { }
+			}
+		
+			function click1(){
+				if(localStorageGet('customChannel') != null) {
+					var custom = prompt('XChat聊天室（不带?）:', localStorageGet('customChannel'));
+				} else {
+					var custom = prompt('XChat聊天室（不带?）:');
+				}
+				if(custom != '' && custom!='null' && custom!=null) {
+					localStorageSet('customChannel',custom)
+					//location.herf="xc.html?"+custom
+					window.location.replace("xc.html?"+custom);
+				} else if (custom) {
+					alert('不能为空')
+				}
+			}
+
+			function click2(){
+				if(localStorageGet('customChannel') != null) {
+					var custom = prompt('Hack.Chat聊天室（不带?）:', localStorageGet('customChannel'));
+				} else {
+					var custom = prompt('Hack.Chat聊天室（不带?）:');
+				}
+				if(custom != '' && custom!='null' && custom!=null) {
+					localStorageSet('customChannel',custom)
+					//location.herf="xc.html?"+custom
+					window.location.replace("hc.html?"+custom);
+				} else if (custom) {
+					alert('不能为空')
+				}
+			}
+			
+			function click3(){
+				if(localStorageGet('customChannel') != null) {
+					var custom = prompt('TChat聊天室（不带?）:', localStorageGet('customChannel'));
+				} else {
+					var custom = prompt('TChat聊天室（不带?）:');
+				}
+				if(custom != '' && custom!='null' && custom!=null) {
+					localStorageSet('customChannel',custom)
+					//location.herf="xc.html?"+custom
+					window.location.replace("tc.html?"+custom);
+				} else if (custom) {
+					alert('不能为空')
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<ul>
+		  <li><div class="dropdown">
+		    <a class="menu">&#9776;</a>
+		    <div class="dropdown-content">
+		      <a onclick="click1()">XChat自定义房间</a>
+			  <a onclick="click2()">Hack.Chat自定义房间</a>
+			  <a onclick="click3()">TChat自定义房间</a>
+			  <a href="channellist.html">主房间列表</a>
+			  <a href="about.html">关于</a>
+			  <a href="love.html">捐赠</a>
+				<a href="https://app.zzchat.cf/app-release.apk" download="app-release.apk">下载最新版安装包</a>
+		    </div>
+		  </div></li>
+		<li><a class="top">zzChat</a></li>
+		</ul>
+		<p class="start">zzChat</p>
+		<p class="a">一款简洁的Hack.Chat/XChat客户端</p>
+		<br>
+		<p class="c">此客户端包含完整的 Markdown 引擎，使用 ```fencing``` 以保留空格。<br>
+用两个美元符号括住 LaTeX 代码，以在消息中内联 LaTeX 样式。<br>
+要使用语法高亮，请用代码框格式：```[language] [code]``` 其中 [language] 是任何已知的编程语言。<br>
+Hack.Chat当前的 GitHub 仓库： https://github.com/hack-chat<br>
+Hack.Chat旧的 GitHub 仓库： https://github.com/AndrewBelt/hack.chat<br>
+XChat的Gitee仓库： https://gitee.com/liguiyu102210/xchat<br>
+机器人、Android 客户端、桌面客户端、浏览器扩展、Docker 镜像、编程库、服务器模块等（Hack.Chat）：<br>
+https://github.com/hack-chat/3rd-party-software-list<br>
+Hack.Chat服务器和 Web 客户端根据 WTFPL 和 MIT 开源许可证发布。消息历史记录不会保留在服务器上。<br>
+XChat服务器会保留您的聊天记录以备不时之需。</p>
+	</body>
+</html>
+
