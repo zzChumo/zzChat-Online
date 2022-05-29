@@ -1,0 +1,14 @@
+{
+  "name": "zzChat Premium for Chrome OS",
+  "short_name": "zzChat Premium",
+  "descriptions": "Chrome PWA版本的zzChat Premium。",
+  "start_url": "start.html",
+  "theme_color": "#555555",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
