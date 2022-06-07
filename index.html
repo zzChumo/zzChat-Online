@@ -151,6 +151,47 @@
                 }
         </script>
 		<script>
+var btn = document.getElementById("btn");
+
+btn.onclick = function() {
+var width = window.screen.width;
+
+var height = window.screen.height;
+
+var elem = document.getElementById("div1");
+
+requestFullScreen(elem);
+
+}
+
+function requestFullScreen(element) {
+if (element.requestFullscreen) {
+element.requestFullscreen();
+
+}
+
+//FireFox
+
+else if (element.mozRequestFullScreen) {
+element.mozRequestFullScreen();
+
+}
+
+//Chrome等
+
+else if (element.webkitRequestFullScreen) {
+element.webkitRequestFullScreen();
+
+}
+
+//IE11
+
+else if (element.msRequestFullscreen) {
+element.msRequestFullscreen();
+
+}
+
+};
 			function localStorageGet(key) {
 				try {
 					return window.localStorage[key]
